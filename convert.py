@@ -27,4 +27,10 @@ for entry in os.scandir(path):
 # Текущая дата
 date_today = datetime.date.today().strftime("%d_%m_%Y")
 
+# Создание каталога
+dir_for_create = path + date_today
+try:
+	os.mkdir(dir_for_create, mode=0o755,)
+except FileExistsError:
+	print("Дирректория с именем {0} уже существует".format(dir_for_create))
 
