@@ -56,3 +56,6 @@ for file in list_files:
         i += 1
     elif pattern_glav.match(file):
         shutil.copyfile(path + file, dir_for_images + "/" + file.lower())
+
+# Изменение размера картинок
+os.system("cd {0} && mogrify -path {0} -resize 1024 *".format(dir_for_images))
