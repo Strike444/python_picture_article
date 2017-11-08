@@ -43,12 +43,16 @@ except FileExistsError:
     print("Дирректория с именем {0} уже существует".format(dir_for_images))
 
 # Копирование и переименование картинок
+i = 0
 for file in list_files:
     # print(path + file)
     pattern = re.compile(r".*\.(jpg|png|jpeg)$", re.I)
-    # i = 0
-    # if pattern.match(file):
-    #     name_without_extension = os.path.splitext(file)[0]
-    #     shutil.copyfile(path + file, dir_for_images + "/" + file.replace(name_without_extension, str(i)))
-    #     i += 1
-    #     # print(file)
+    pattern_glav = re.compile(r"glav\.(jpg|png|jpeg)$", re.I)
+    if pattern.match(file) and not pattern_glav.match(file):
+        name_without_extension = os.path.splitext(file)[0]
+        print(i)
+        shutil.copyfile(path + file, dir_for_images + "/" +
+                        file.replace(name_without_extension, str(i)).lower())
+        i += 1
+    elif pattern_glav.match(file):
+        shutil.copyfile(path + file, dir_for_images + "/" + file.lower())
